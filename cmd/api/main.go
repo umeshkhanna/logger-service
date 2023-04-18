@@ -15,7 +15,7 @@ const (
 	webPort   = "80"
 	rpcPort   = "5001"
 	gRpcPort  = "50001"
-	mongoURL  = "mongodb://localhost:27017"
+	mongoURL  = "mongodb://host.docker.internal:27017/"
 	dbTimeout = 15 * time.Second
 )
 
@@ -70,10 +70,11 @@ func (app *Config) serve() {
 
 func connectToMongo() (*mongo.Client, error) {
 	clientOptions := options.Client().ApplyURI(mongoURL)
-	clientOptions.SetAuth(options.Credential{
-		Username: "admin",
-		Password: "password",
-	})
+	//clientOptions.SetAuth(options.Credential{
+	//	Username: "admin",
+	//	Password: "password",
+	//})
+
 	c, err := mongo.Connect(context.TODO(), clientOptions)
 	if err != nil {
 		log.Println("Error Connecting", err)

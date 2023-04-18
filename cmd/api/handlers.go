@@ -20,11 +20,12 @@ func (app *Config) WriteLog(w http.ResponseWriter, r *http.Request) {
 	err := app.Models.LogEntry.Insert(event)
 	if err != nil {
 		app.errJson(w, err)
+		return
 	}
 
 	resp := jsonResponse{
 		Error:   false,
-		Message: "logged",
+		Message: "loggedd",
 	}
 
 	app.writeJson(w, http.StatusAccepted, resp)
